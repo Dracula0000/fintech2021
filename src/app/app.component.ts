@@ -1,32 +1,150 @@
 import { Component } from '@angular/core';
+import { MaterialModule } from './shared/material/material.module';
+import { NgForm, NgModel } from '@angular/forms';
+
 
 @Component({
   selector: 'ac-root',
   template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center" class="content">
-      <h1>
-        Welcome to {{title}}!
-      </h1>
-      <span style="display: block">{{ title }} app is running!</span>
-      <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+    <div >
+      <div>
+          <form #f="ngForm" (submit)="loginHandler(f)">
+
+              <mat-card style="width: 200px;
+                  height: 200px;
+                  margin: 100px auto;"  >
+                <mat-card-title></mat-card-title>
+                <mat-card-subtitle>
+                  <!-- Login -->
+                  <div *ngIf="!viewRegisterArea">
+                      <span class="material-icons">account_circle</span>
+                          <mat-form-field appearance="fill">
+                            <mat-label>Email</mat-label>
+                            <input matInput
+                              type="email"
+                              placeholder="you@example.com"
+                              ngModel name="lemail"
+                              required email
+                              #lemailRef="ngModel"
+                              [ngClass]="checkField(lemailRef)">
+                          </mat-form-field>
+                          <br/>
+                      <span class="material-icons">https</span>
+                          <mat-form-field appearance="fill">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="password"
+                            required
+                            ngModel name="lPassword"
+                            #lPasswordRef="ngModel"
+                            [ngClass]="checkField(lPasswordRef)">
+                          </mat-form-field>
+                    </div>
+
+                    <!-- Registrati -->
+                    <div *ngIf="viewRegisterArea">
+
+                          <mat-form-field appearance="fill">
+                            <mat-label>Email</mat-label>
+
+                            <input matInput
+                              type="email"
+                              placeholder="you@example.com"
+                              ngModel name="email"
+                              required email
+                              #emailRef="ngModel"
+                              [ngClass]="checkField(emailRef)">
+                          </mat-form-field>
+                          <br/>
+
+                          <mat-form-field appearance="fill">
+                            <mat-label>Nome</mat-label>
+                            <input matInput type="text"
+                            required
+                            ngModel name="mNome"
+                            #mNomeRef="ngModel"
+                            [ngClass]="checkField(mNomeRef)">
+                          </mat-form-field>
+
+                          <mat-form-field appearance="fill">
+                            <mat-label>Cognome</mat-label>
+                            <input matInput type="text"
+                            required
+                            ngModel name="mCognome"
+                            #mCognomeRef="ngModel"
+                            [ngClass]="checkField(mCognomeRef)">
+                          </mat-form-field>
+
+                          <mat-form-field appearance="fill">
+                            <mat-label>RegPassword</mat-label>
+                            <input matInput type="RegPassword"
+                            required
+                            ngModel name="mRegPassword"
+                            #mRegPasswordRef="ngModel"
+                            [ngClass]="checkField(mRegPasswordRef)">
+                          </mat-form-field>
+
+                          <mat-form-field appearance="fill">
+                            <mat-label>RegConfirmPassword</mat-label>
+                            <input matInput type="RegConfirmPassword"
+                            required
+                            ngModel name="mRegConfirmPassword"
+                            #mRegConfirmPasswordRef="ngModel"
+                            [ngClass]="checkField(mRegConfirmPasswordRef)">
+                          </mat-form-field>
+
+
+                    </div>
+
+                  </mat-card-subtitle>
+                  <mat-card-actions>
+                      <button type="submit" mat-flat-button color="primary" [disabled]="f.invalid">Accedi</button>
+                      <button mat-button color="primary" (click)="RegisterAreaHandler()">Crea un nuovo account</button>
+                  </mat-card-actions>
+              </mat-card>
+
+        </form>
+      </div>
     </div>
-    <h2>Here are some links to help you start: </h2>
-    <ul>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-      </li>
-    </ul>
+
     <router-outlet></router-outlet>
   `,
-  styles: []
+  styles: [`
+  div#orizzontale {
+    width: 200px;
+    height: 200px;
+    background: #25FF00;
+    margin: 0 auto;
+    }
+  div#verticale {
+      width: 200px;
+      height: 200px;
+      background: #25FF00;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -100px;
+      margin-left: -100px;
+      }
+
+    `
+  ]
 })
+
 export class AppComponent {
-  title = 'fintech';
+  title = 'Fintech';
+  viewRegisterArea : boolean = false;
+
+  loginHandler(form : any){
+    console.log('Ciao')
+  }
+
+  RegisterAreaHandler() {
+    this.viewRegisterArea = !this.viewRegisterArea;
+  }
+
+  checkField(input: NgModel) {
+    return { 'is-invalid': input.invalid, 'is-valid': input.valid}
+  }
+/*
+controlla che i valori dei due campi coincidano! Segnati per comodità un TODO, questo sarà il caso in cui scriveremo un validatore custom.*/
 }
