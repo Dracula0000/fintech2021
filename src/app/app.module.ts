@@ -5,14 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SignInComponentComponent } from './views/sign-in-component.component';
 import { FormsModule } from "@angular/forms";
+import { LoginComponent } from './views/login.component';
+import { SignInComponent } from './views/sign-in.component';
+import { RegisterComponent } from './views/register.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignInComponentComponent
+    LoginComponent,
+    SignInComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
