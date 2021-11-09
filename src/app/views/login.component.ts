@@ -23,20 +23,20 @@ export class LoginComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('Init msiginVisible ' +this.msiginVisible);
-      console.log('Init mregisterVisible ' +this.mregisterVisible);
+    //console.log('Init msiginVisible ' +this.msiginVisible);
+    //  console.log('Init mregisterVisible ' +this.mregisterVisible);
   }
 
 
   OnChanges() {
-      console.log('msiginVisible ' +this.msiginVisible);
-      console.log('mregisterVisible ' +this.mregisterVisible);
+    //  console.log('msiginVisible ' +this.msiginVisible);
+     // console.log('mregisterVisible ' +this.mregisterVisible);
   }
 
 
 
   toggle(status: any) {
-    console.log('Emit ' +status);
+   // console.log('Emit ' +status);
     this.msiginVisible=status;
   }
 }

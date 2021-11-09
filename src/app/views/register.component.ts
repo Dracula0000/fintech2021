@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MaterialModule } from '../shared/material/material.module';
-import { NgForm, NgModel } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 
 /*
 controlla che i valori dei due campi coincidano! Segnati per comodità un TODO, questo sarà il caso in cui scriveremo un validatore custom.
@@ -68,7 +68,7 @@ controlla che i valori dei due campi coincidano! Segnati per comodità un TODO, 
               </mat-card-subtitle>
               <mat-card-actions>
                   <div>
-                      <button type="submit" mat-flat-button color="primary" [disabled]="f.invalid">Registrati</button>
+                      <button type="submit" mat-flat-button color="primary" [disabled]="f.invalid || differentPassword(mRegPasswordRef.value,mRegConfirmPasswordRef.value)" style="width : 100%">Registrati</button>
                   </div>          
               </mat-card-actions>
             </form>
@@ -85,6 +85,12 @@ controlla che i valori dei due campi coincidano! Segnati per comodità un TODO, 
   .Register{
         width: 300px;        
         margin: 100px auto;
+  }
+  mat-form-field {
+    width: 100%;
+  }
+  mat-flat-button{
+    width: 100%;
   }
     `
   ]
@@ -108,7 +114,16 @@ export class RegisterComponent implements OnInit {
   }
 
   checkField(input: NgModel) {
+    //    console.log('Input:' + input);
     return { 'is-invalid': input.invalid, 'is-valid': input.valid }
+  }
+
+  differentPassword(mRegPassword : string, mRegConfirmPassword : string){
+    console.log('Password uguali? :'+ mRegPassword === mRegConfirmPassword  );
+    if (mRegPassword !=='' && mRegPassword === mRegConfirmPassword) {
+      return false;
+    }
+    return true;
   }
 
 

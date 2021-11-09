@@ -22,7 +22,8 @@ import { NgForm, NgModel } from '@angular/forms';
                           ngModel name="lemail"
                           required email
                           #lemailRef="ngModel"
-                          [ngClass]="checkField(lemailRef)">
+                          [ngClass]="checkField(lemailRef)"
+                          >
                       </mat-form-field>
                       <br/>
                   
@@ -32,13 +33,14 @@ import { NgForm, NgModel } from '@angular/forms';
                         required
                         ngModel name="lPassword"
                         #lPasswordRef="ngModel"
-                        [ngClass]="checkField(lPasswordRef)">
+                        [ngClass]="checkField(lPasswordRef)"
+                        >
                       </mat-form-field>
                 
               </mat-card-subtitle>
               <mat-card-actions>
                   <div>
-                    <button type="submit" mat-flat-button color="primary" [disabled]="f.invalid">Accedi</button>
+                    <button type="submit" mat-flat-button color="primary" [disabled]="f.invalid" style="width : 100%">Accedi</button>
                   </div>
     
               </mat-card-actions>
@@ -57,6 +59,9 @@ import { NgForm, NgModel } from '@angular/forms';
       width: 300px;      
       margin: 100px auto;
     }
+    mat-form-field {
+      width: 100%;
+    } 
     `
 
   ]
