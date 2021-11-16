@@ -12,92 +12,104 @@ controlla che i valori dei due campi coincidano! Segnati per comodità un TODO, 
   <!-- Registrati -->
   <!-- div *ngIf="visualizza" -->
       
-      <mat-card class="Register" >
-        <form #f="ngForm" (submit)="RegisterHandler(f)">  
-            <mat-card-title>Registrati</mat-card-title>
-              <mat-card-subtitle>     
+            <form #f="ngForm" (submit)="RegisterHandler(f)">  
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput
+                    type="email"
+                    placeholder="you@example.com"
+                    ngModel name="email"
+                    required email
+                    #emailRef="ngModel"
+                    [ngClass]="checkField(emailRef)">
+                    <mat-error *ngIf="emailRef.invalid && f.submitted">Email richiesta</mat-error>    
+                </mat-form-field>        
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>Email</mat-label>
+                <mat-form-field appearance="fill">
+                    <mat-label>Nome</mat-label>
+                    <input matInput type="text"
+                    required
+                    ngModel name="Nome"
+                    #nomeRef="ngModel"
+                    [ngClass]="checkField(nomeRef)">
+                    <mat-error *ngIf="nomeRef.invalid && f.submitted">Nome richiesto</mat-error>    
+                </mat-form-field>                
 
-                        <input matInput
-                        type="email"
-                        placeholder="you@example.com"
-                        ngModel name="email"
-                        required email
-                        #emailRef="ngModel"
-                        [ngClass]="checkField(emailRef)">
-                    </mat-form-field>
-                    <br/>
+                <mat-form-field appearance="fill">
+                    <mat-label>Cognome</mat-label>
+                    <input matInput type="text"
+                    required
+                    ngModel name="Cognome"
+                    #cognomeRef="ngModel"
+                    [ngClass]="checkField(cognomeRef)">
+                    <mat-error *ngIf="cognomeRef.invalid && f.submitted">Cognome richiesto</mat-error>    
+                </mat-form-field>
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>Nome</mat-label>
-                        <input matInput type="text"
-                        required
-                        ngModel name="mNome"
-                        #mNomeRef="ngModel"
-                        [ngClass]="checkField(mNomeRef)">
-                    </mat-form-field>
-
-                    <mat-form-field appearance="fill">
-                        <mat-label>Cognome</mat-label>
-                        <input matInput type="text"
-                        required
-                        ngModel name="mCognome"
-                        #mCognomeRef="ngModel"
-                        [ngClass]="checkField(mCognomeRef)">
-                    </mat-form-field>
-
-                    <mat-form-field appearance="fill">
-                        <mat-label>RegPassword</mat-label>
-                        <input matInput type="RegPassword"
-                        required
-                        ngModel name="mRegPassword"
-                        #mRegPasswordRef="ngModel"
-                        [ngClass]="checkField(mRegPasswordRef)">
-                    </mat-form-field>
-
-                    <mat-form-field appearance="fill">
-                        <mat-label>RegConfirmPassword</mat-label>
-                        <input matInput type="RegConfirmPassword"
-                        required
-                        ngModel name="mRegConfirmPassword"
-                        #mRegConfirmPasswordRef="ngModel"
-                        [ngClass]="checkField(mRegConfirmPasswordRef)">
-                    </mat-form-field>
-              </mat-card-subtitle>
+              <mat-form-field appearance="fill">                                                      
+                <mat-label>Password</mat-label>
+                  <input matInput [type]="passwordHide ? 'password' : 'text'"
+                  required
+                  ngModel name="Password"
+                  #passwordRef="ngModel"
+                  [ngClass]="checkField(passwordRef)"
+                >
+                
+                  <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
+                    <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="passwordRef.invalid && f.submitted">Password richiesta</mat-error>    
+              </mat-form-field> 
+              
+              <mat-form-field appearance="fill">                  
+                                                      
+                <mat-label>confirm Password</mat-label>
+                <input matInput [type]="confirmPasswordHide ? 'password' : 'text'"
+                  required
+                  ngModel name="confirmPassword"
+                  #confirmPasswordRef="ngModel"
+                  [ngClass]="checkField(confirmPasswordRef)"
+                >
+                
+                <button mat-icon-button matSuffix (click)="confirmPasswordHide = !confirmPasswordHide" [attr.aria-label]="'Hide confirmPassword'" [attr.aria-pressed]="confirmPasswordHide">
+                  <mat-icon>{{confirmPasswordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="confirmPasswordRef.invalid && f.submitted">Conferma password richiesta</mat-error>    
+              </mat-form-field> 
+                    
               <mat-card-actions>
                   <div>
-                      <button type="submit" mat-flat-button color="primary" [disabled]="f.invalid || differentPassword(mRegPasswordRef.value,mRegConfirmPasswordRef.value)" style="width : 100%">Registrati</button>
+                      <!--<button type="submit" mat-flat-button color="primary" [disabled]="f.invalid || differentPassword(passwordRef.value,confirmPasswordRef.value)" style="width : 100%">Registrati</button>-->
+                      <button type="submit" mat-flat-button color="primary" style="width : 100%">Registrati</button>
                   </div>          
               </mat-card-actions>
-            </form>
-          <div>
-            <button mat-button color="primary" (click)="hideMe()">Hai già un account? Accedi</button>                  
-          </div>  
-      </mat-card>
+        </form>  
+        <!--
+        <div>
+          <button mat-button color="primary" (click)="hideMe()">Hai già un account? Accedi</button>                  
+        </div>  
+        -->
+
 
     
 
 <!-- /div -->
   `,
-  styles: [`
-  .Register{
-        width: 300px;        
-        margin: 100px auto;
-  }
-  mat-form-field {
-    width: 100%;
-  }
-  mat-flat-button{
-    width: 100%;
-  }
-    `
-  ]
+  styles: [`  
+    mat-form-field {
+      width: 100%;
+    }
+    mat-flat-button{
+      width: 100%;
+    }
+  `]
 })
 export class RegisterComponent implements OnInit {
   @Input() visualizza: boolean = true;
   @Output() registerVisible = new EventEmitter<boolean>();
+  @Output() componentName = new EventEmitter<string>();
+  passwordHide: boolean = true;
+  confirmPasswordHide: boolean = true;
+
 
   constructor() { }
 
@@ -105,12 +117,19 @@ export class RegisterComponent implements OnInit {
   }
 
   RegisterHandler(form: any) {
-    console.log('Hai eseguito la Registrazione')
+    if (form.valid){
+      console.log('hai eseguito la registrazione :', form.value)          
+    }
+      else
+    {
+      console.log('Errore : form di registrazione non valido')          
+    }
   }
 
   hideMe() {
     console.log('register status:' + this.visualizza);    
-    this.registerVisible.emit(true)
+    //this.registerVisible.emit(true);
+    this.componentName.emit("register")
   }
 
   checkField(input: NgModel) {
@@ -118,9 +137,9 @@ export class RegisterComponent implements OnInit {
     return { 'is-invalid': input.invalid, 'is-valid': input.valid }
   }
 
-  differentPassword(mRegPassword : string, mRegConfirmPassword : string){
-    console.log('Password uguali? :'+ mRegPassword === mRegConfirmPassword  );
-    if (mRegPassword !=='' && mRegPassword === mRegConfirmPassword) {
+  differentPassword(mRegPassword : string, mRegconfirmPassword : string){
+    console.log('Password uguali? :'+ mRegPassword === mRegconfirmPassword  );
+    if (mRegPassword !=='' && mRegPassword === mRegconfirmPassword) {
       return false;
     }
     return true;
