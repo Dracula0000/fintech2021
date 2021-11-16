@@ -9,6 +9,8 @@ import { FormsModule } from "@angular/forms";
 import { LoginComponent } from './views/login.component';
 import { SignInComponent } from './views/sign-in.component';
 import { RegisterComponent } from './views/register.component';
+import { CardListComponent } from './views/card-list.component';
+
 
 
 
@@ -17,7 +19,8 @@ import { RegisterComponent } from './views/register.component';
     AppComponent,
     LoginComponent,
     SignInComponent,
-    RegisterComponent
+    RegisterComponent,
+    CardListComponent
   ],
   imports: [
     BrowserModule,
