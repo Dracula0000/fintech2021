@@ -5,6 +5,7 @@ import { SignInComponent } from './sign-in.component';
 @Component({
   selector: 'ac-login-component',
   template: `
+          
             <!-- login works -->
             <mat-card class="card300" >  
               <mat-card-title>{{msiginVisible ? 'Login' : 'Registrazione'}}</mat-card-title>

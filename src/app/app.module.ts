@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
+//import custom
 import { LoginComponent } from './views/login.component';
 import { SignInComponent } from './views/sign-in.component';
 import { RegisterComponent } from './views/register.component';
 import { CardListComponent } from './views/card-list.component';
 
-
-
+import { CardFormComponent } from './views/card-form.component';
+import { CardsComponent } from './views/cards.components';
 
 @NgModule({
   declarations: [
@@ -20,14 +22,17 @@ import { CardListComponent } from './views/card-list.component';
     LoginComponent,
     SignInComponent,
     RegisterComponent,
-    CardListComponent
+    CardListComponent,
+    CardFormComponent,
+    CardsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
