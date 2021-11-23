@@ -1,7 +1,10 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { Component, OnInit, OnChanges, ElementRef } from '@angular/core';
 import { CardListComponent } from './card-list.component';
 import { CardFormComponent } from './card-form.component';
-import { Card } from '../models/card';
+import { Card ,CardsListExample} from '../models/card';
+import { CardForm } from '../models/card-form';
+
 
 
 @Component({
@@ -9,37 +12,60 @@ import { Card } from '../models/card';
   template: `
 
   <!-- Creates a layout with a left and right sidenav and implicit content. -->
-  card component works
-      <mat-sidenav-container>
-        <mat-sidenav>Start
-        <!--
+
+  <!-- TODO INVERTIRE LA VISUALIZZAZIONE DELLA SIDENAV -->
+
+  <mat-sidenav-container class="container" >
+      <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+        <ac-cardform-component
+          (addCardForm)="handlerAddCardForm($event)"
+          (cancelCardForm)="handlerCancelCardForm($event)"
+        >
+      </ac-cardform-component>
+
+      </mat-sidenav>
+      <mat-sidenav-content>
           <ac-cardList-component
-              (selectedCard)="getCard($event)"
-              (cardId)="getCardId($event)"
-              (addCard)="addCard($event)"
-          >
+                [cards] = "cards"
+                (selectedCard)="getCard($event)"
+                (cardId)="getCardId($event)"
+                (addCard)="addCard($event)"
+            >
           </ac-cardList-component>
--->
-        </mat-sidenav>
-        <mat-sidenav position="end">End
-          <!--
-            <ac-cardform-component>
-          </ac-cardform-component>
--->
-        </mat-sidenav>
-        <section>Main</section>
-      </mat-sidenav-container>
+      </mat-sidenav-content>
+  </mat-sidenav-container>
 
   `,
   styles: [`
+      .container {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .events {
+        /*width: 300px;
+        height: 200px;*/
+        overflow: auto;
+        border: 1px solid #555;
+      }
 
   `]
 })
 export class CardsComponent  {
+  //@ViewChild(CardFormComponent) CardFormEl!: ElementRef<CardFormComponent>;
+
+    events: string[] = [];
+    opened: boolean = false;
+
+    cards : Card[] = CardsListExample;
 
 
   //TODO
-  //@ViewChild('ilTuoSelettore', { read: ??? }) form!: ???;
+
 
 
   getCard(c : Card) {
@@ -49,8 +75,36 @@ export class CardsComponent  {
   getCardId(_id : string | null) {
     console.log("getCardId Id ",_id);
   }
-  addCard(v : any) {
-    console.log("addCard value ",v);
+  addCard(v : boolean) {
+    this.opened = v;
+    //console.log("addCard value ",v);
   }
+
+  handlerCancelCardForm (v : boolean) {
+    this.opened = !v;
+    //console.log("addCard value ",v);
+  }
+
+
+     newId  () :  string  {
+              return ''
+     }
+
+
+  handlerAddCardForm(v: CardForm){
+    /* */
+      this.opened = !this.opened;
+      console.log('SOno qui: ', v);
+
+      this.cards = [...this.cards, {_id : ''
+            , number : v.cardNumber
+            , ownerId : ''
+            , owner : `${v.name} ${v.surname}`
+            , type: v.type
+            , amount : 0 }];
+
+      console.log('Fatto', this.cards);
+  }
+
 
 }

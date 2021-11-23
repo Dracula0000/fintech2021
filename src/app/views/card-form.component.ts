@@ -1,7 +1,7 @@
-import { Component, OnInit, OnChanges, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, OnChanges, EventEmitter, Output, ViewChild } from '@angular/core';
 import { cardTypes} from '../models/card';
 import { CardForm} from '../models/card-form';
-import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'ac-cardform-component',
@@ -10,7 +10,7 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 
           <!-- form dettaglio -->
           <br />
-          <mat-card class="card300" >
+          <mat-card class="card-form" >
 
             <mat-card-title>
               Aggiungi carta<br />
@@ -18,7 +18,7 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 
             <mat-card-subtitle>
 
-                  <form [formGroup]="mCardForm" >
+                  <form [formGroup]="mCardForm" #form>
                     <div>
                       <mat-form-field appearance="fill">
                         <mat-label>Tipo di carta</mat-label>
@@ -73,9 +73,10 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 
   `,
   styles: [`
-    .card300{
-      width: 50%;
-      margin: 100px auto;
+    .card-form{
+      width: 400px;
+      margin: 2px auto;
+
     }
     .mat-form-field {
       width: 100%;
@@ -112,7 +113,7 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 })
 export class CardFormComponent  {
   @Output() addCardForm = new EventEmitter<CardForm>()
-  @Output() cancelCardForm = new EventEmitter<CardForm>()
+  @Output() cancelCardForm = new EventEmitter<boolean>()
 
   //TODO
   //@ViewChild('ilTuoSelettore', { read: ??? }) form!: ???;
@@ -129,13 +130,28 @@ export class CardFormComponent  {
 
   constructor(private fb : FormBuilder) {}
 
+ // @ViewChild('form', {read : NgForm}) formRef! : NgForm;
+
+
+        cleaup(){
+          //svuoto il form
+          //this.formRef.reset();
+
+          this.mCardForm.setValue({type : '', name : '', surname : '', cardNumber : '', secureCode : ''});
+          this.mCardForm.reset;
+          this.mCardForm.markAsUntouched;
+        }
+
 
         checkAddCardForm(){
 
           if (this.mCardForm.valid){
-            //console.log("checkAddCardForm.emit");
-            this.addCardForm.emit();
+            const mcf : CardForm = this.mCardForm.getRawValue();
+            //svuoto il form
+            this.cleaup();
 
+            console.log('EMIT: ',this.mCardForm.getRawValue());
+            this.addCardForm.emit(mcf);
           }
           else {
             console.log("Form invalid for add");
@@ -144,16 +160,10 @@ export class CardFormComponent  {
         }
 
         checkCancelCardForm(){
-
-          if (this.mCardForm.valid){
             //console.log("cancelCardForm.emit");
-            this.cancelCardForm.emit();
-
-          }
-          else {
-            console.log("Form invalid for cancel");
-          }
-
-
+            this.cancelCardForm.emit(true);
         }
+
+
+
       }

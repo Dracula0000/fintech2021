@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, OnChanges, EventEmitter, Output, Input } from '@angular/core';
 import { Card ,CardsListExample,cardTypes} from '../models/card';
 import { CardForm} from '../models/card-form';
 
@@ -13,7 +13,7 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
           <!--{{cards | json}}-->
           <!-- Elenco -->
 
-          <mat-card class="card300" >
+          <mat-card class="card-list" >
 
             <mat-card-title>
               Carte<br />
@@ -51,16 +51,17 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 
                 <mat-card-actions>
                   <div>
-                    <button type="button" mat-raised-button style="width:99%; margin: 5px" (click)="addCard.emit()">Aggiungi</button>
+                    <button type="button" mat-raised-button style="width:99%; margin: 5px" (click)="addNewCard()">Aggiungi</button>
                   </div>
               </mat-card-actions>
             </mat-card-subtitle>
           </mat-card>
   `,
   styles: [`
-    .card300{
-      width: 50%;
-      margin: 100px auto;
+    .card-list{
+      width: 95%;
+      margin: 2px auto;
+
     }
     .mat-form-field {
       width: 100%;
@@ -96,17 +97,18 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
   `]
 })
 export class CardListComponent  {
+  @Input() cards : Card[]= [] ;
   @Output() selectedCard = new EventEmitter<Card>()
   @Output() cardId =new EventEmitter<string | null >()
-  @Output() addCard = new EventEmitter<CardForm | null >()
+  @Output() addCard = new EventEmitter<boolean>()
 
   mCardTypes  = cardTypes ;
 
 
 
-  cards : Card[] = CardsListExample;
+  //cards : Card[] = CardsListExample;
 
-
+  constructor(private fb : FormBuilder) {}
 
  mCardForm = this.fb.group({
     type : this.fb.control('', Validators.required),
@@ -116,22 +118,16 @@ export class CardListComponent  {
     secureCode  : this.fb.control('', [Validators.required,Validators.minLength(3),Validators.maxLength(3)])
   });
 
-  constructor(private fb : FormBuilder) {}
-
-
         saveHandler(fg : FormGroup){
           console.log(fg)
         }
 
 
 
-        addNewCard(f : FormGroup){
-          if(f.invalid){
-            console.log("From Invalid:", f.value )
-          }
-          else{
-            console.log("dati nuova card:", f.value )
-          }
+        addNewCard(){
+            this.addCard.emit(true);
+            //console.log("Aggiungi nuova card:" )
+
         }
 
 
