@@ -4,6 +4,7 @@ import { CardListComponent } from './card-list.component';
 import { CardFormComponent } from './card-form.component';
 import { Card ,CardsListExample} from '../models/card';
 import { CardForm } from '../models/card-form';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 
@@ -30,7 +31,7 @@ import { CardForm } from '../models/card-form';
       <mat-sidenav-content>
           <ac-cardList-component
                 [cards] = "cards"
-                (selectedCard)="getCard($event)"
+                (cardMovements)="viewMovimentCard($event)"
                 (cardId)="getCardId($event)"
                 (addCard)="addCard($event)"
                 (delCardId)="deleteCardId($event)"
@@ -62,34 +63,46 @@ import { CardForm } from '../models/card-form';
 export class CardsComponent  {
   //@ViewChild(CardFormComponent) CardFormEl!: ElementRef<CardFormComponent>;
 
+  constructor(private _snackBar: MatSnackBar) {}
+
     events: string[] = [];
     opened: boolean = false;
 
     cards : Card[] = CardsListExample;
 
+    openSnackBar(message: string, action: string) {
+      this._snackBar.open(message,action);
+    }
 
-  //TODO
+    /*
+    snackbar.open('Message archived', 'Undo', {
+      duration: 3000
+    });
+    */
 
+    getCard(c : Card) {
+      console.log('getCard ',c);
+    }
 
+    getCardId(_id : string | null) {
+      console.log("getCardId Id ",_id);
+    }
 
-  getCard(c : Card) {
-    console.log('getCard ',c);
-  }
+    addCard(v : boolean) {
+      this.opened = v;
+      //console.log("addCard value ",v);
+    }
 
-  getCardId(_id : string | null) {
-    console.log("getCardId Id ",_id);
-  }
-
-  addCard(v : boolean) {
-    this.opened = v;
-    //console.log("addCard value ",v);
-  }
+    viewMovimentCard(c: Card){
+      console.log('credit card movements',c);
+    }
 
   deleteCardId(_id : string | null){
 
     if (_id !== null){
 
-      this.cards=this.cards.filter( x => x._id !== _id)
+      this.cards=this.cards.filter( x => x._id !== _id);
+      this.openSnackBar(`Carta: ${ _id } eliminata `, "Chiudi")
     }
   }
 
@@ -115,8 +128,12 @@ export class CardsComponent  {
             , type: v.type
             , amount : 0 }];
 
+            this.openSnackBar(`Carta: ${v.cardNumber} aggiunta`, "Chiudi")
+
       //console.log('Fatto', this.cards);
   }
+
+
 
 
 }

@@ -37,7 +37,7 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
                       </p>
 
                     <mat-action-list>
-                      <div class="material-icons" (click)="selectedCard.emit(card)"  matTooltip="Vedi movimenti">
+                      <div class="material-icons" (click)="cardMovements.emit(card)"  matTooltip="Vedi movimenti">
                         description
                       </div>
                       <div class="material-icons" (click)="delCardId.emit(card._id)"  matTooltip="Rimuovi">
@@ -98,7 +98,7 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 })
 export class CardListComponent  {
   @Input() cards : Card[]= [] ;
-  @Output() selectedCard = new EventEmitter<Card>()
+  @Output() cardMovements = new EventEmitter<Card>()
   @Output() cardId =new EventEmitter<string | null >()
   @Output() delCardId =new EventEmitter<string | null >()
   @Output() addCard = new EventEmitter<boolean>()
