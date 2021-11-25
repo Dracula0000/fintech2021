@@ -9,8 +9,9 @@ import { FormsModule } from '@angular/forms';
   template: `
     <!--
     <ac-login-component></ac-login-component>
-    -->
     <ac-cards-component></ac-cards-component>
+    -->
+    <ac-movements-component></ac-movements-component>
 
     <router-outlet></router-outlet>
   `,
