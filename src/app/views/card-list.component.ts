@@ -40,7 +40,7 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
                       <div class="material-icons" (click)="selectedCard.emit(card)"  matTooltip="Vedi movimenti">
                         description
                       </div>
-                      <div class="material-icons" (click)="cardId.emit(card._id)"  matTooltip="Rimuovi">
+                      <div class="material-icons" (click)="delCardId.emit(card._id)"  matTooltip="Rimuovi">
                         delete
                       </div>
                     </mat-action-list>
@@ -100,6 +100,7 @@ export class CardListComponent  {
   @Input() cards : Card[]= [] ;
   @Output() selectedCard = new EventEmitter<Card>()
   @Output() cardId =new EventEmitter<string | null >()
+  @Output() delCardId =new EventEmitter<string | null >()
   @Output() addCard = new EventEmitter<boolean>()
 
   mCardTypes  = cardTypes ;
@@ -121,8 +122,6 @@ export class CardListComponent  {
         saveHandler(fg : FormGroup){
           console.log(fg)
         }
-
-
 
         addNewCard(){
             this.addCard.emit(true);

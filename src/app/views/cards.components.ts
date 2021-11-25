@@ -15,8 +15,11 @@ import { CardForm } from '../models/card-form';
 
   <!-- TODO INVERTIRE LA VISUALIZZAZIONE DELLA SIDENAV -->
 
-  <mat-sidenav-container class="container" >
-      <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+  <mat-sidenav-container class="container"  >
+      <mat-sidenav #sidenav mode="side"
+                    [(opened)]="opened"
+                    class="sidenav"
+                    position="end">
         <ac-cardform-component
           (addCardForm)="handlerAddCardForm($event)"
           (cancelCardForm)="handlerCancelCardForm($event)"
@@ -30,6 +33,7 @@ import { CardForm } from '../models/card-form';
                 (selectedCard)="getCard($event)"
                 (cardId)="getCardId($event)"
                 (addCard)="addCard($event)"
+                (delCardId)="deleteCardId($event)"
             >
           </ac-cardList-component>
       </mat-sidenav-content>
@@ -75,9 +79,18 @@ export class CardsComponent  {
   getCardId(_id : string | null) {
     console.log("getCardId Id ",_id);
   }
+
   addCard(v : boolean) {
     this.opened = v;
     //console.log("addCard value ",v);
+  }
+
+  deleteCardId(_id : string | null){
+
+    if (_id !== null){
+
+      this.cards=this.cards.filter( x => x._id !== _id)
+    }
   }
 
   handlerCancelCardForm (v : boolean) {
@@ -94,7 +107,6 @@ export class CardsComponent  {
   handlerAddCardForm(v: CardForm){
     /* */
       this.opened = !this.opened;
-      console.log('SOno qui: ', v);
 
       this.cards = [...this.cards, {_id : ''
             , number : v.cardNumber
@@ -103,7 +115,7 @@ export class CardsComponent  {
             , type: v.type
             , amount : 0 }];
 
-      console.log('Fatto', this.cards);
+      //console.log('Fatto', this.cards);
   }
 
 

@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, EventEmitter, Output, ViewChild } from '@
 import { cardTypes} from '../models/card';
 import { CardForm} from '../models/card-form';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
+import { validateHorizontalPosition } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'ac-cardform-component',
@@ -26,7 +27,7 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
                           <mat-option></mat-option>
                           <mat-option *ngFor="let v of mCardTypes"
                             [value]="v"
-                          >{{v}}</mat-option>
+                          >{{v | uppercase}}</mat-option>
                         </mat-select>
                       </mat-form-field>
                     </div>
@@ -124,8 +125,13 @@ export class CardFormComponent  {
     type : this.fb.control('', Validators.required),
     name : this.fb.control('', Validators.required),
     surname : this.fb.control('', Validators.required),
-    cardNumber : this.fb.control('', [Validators.required,Validators.minLength(16),Validators.maxLength(16)] ),
-    secureCode  : this.fb.control('', [Validators.required,Validators.minLength(3),Validators.maxLength(3)])
+    cardNumber : this.fb.control('',
+    [Validators.required,
+      Validators.minLength(16),
+      Validators.maxLength(16)] ),
+    secureCode  : this.fb.control('',
+    [Validators.required,
+      Validators.minLength(3),Validators.maxLength(3)])
   });
 
   constructor(private fb : FormBuilder) {}
