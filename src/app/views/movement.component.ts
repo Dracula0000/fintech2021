@@ -8,21 +8,32 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
   selector: 'ac-movement-component',
   template: `
           <mat-expansion-panel (opened)="panelOpenState = true"
-                (closed)="panelOpenState = false">
+                (closed)="panelOpenState = false" >
           <mat-expansion-panel-header>
-            <mat-panel-title>
-                  {{data}}
-                  {{amount}}
-                  {{type}}
-                  {{title}}
+
+            <mat-panel-title >
+              <div class="amount" >
+                <i style="color : grey" >[{{data  | date:'dd/MM/YYYY'}}]</i>
+              </div>
+              <div
+                [ngClass]="{'colorGreen' : movType ==='in' , 'colorRed' : movType ==='out'}"
+                class="amount" >
+                    {{amount}}
+              </div>
+              <!--<div [style.color]="movType === 'in' ? 'green' : 'red'">-->
+                <!--</div>-->
+              <div style="width : 300px" >
+                    {{title}}
+              </div>
+
             </mat-panel-title>
-            <mat-panel-description>
-              Currently I am {{panelOpenState ? 'open' : 'closed'}}
+
+            <mat-panel-description >
+                  {{SubstringDescription}}
             </mat-panel-description>
           </mat-expansion-panel-header>
-              {{descrizone}}
+          {{description}}
         </mat-expansion-panel>
-
   `,
   styles: [`
     .card-form{
@@ -61,16 +72,45 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
       vertical-align: middle;
     }
     */
+    .colorRed{
+        color : red;
+    }
+    .colorGreen{
+        color : green;
+        position : left;
+    }
+    .flex-container {
+      justify-content: space-between;
+      align-items: right;
+    }
+    .amount {
+      padding-right : 50px;
+
+    }
+
   `]
 })
 export class MovementComponent  {
 
-  @Input() data : string =''//La data (in formato stringa, esattamente come la stai vedendo)
+  @Input() data : number | null = null; //La data (in formato stringa, esattamente come la stai vedendo)
   @Input() amount :  number = 0 //L’ammontare del movimento
-  @Input() type : 'in' | 'out' = 'in' //Il tipo di movimento (“type” nel modello): a seconda del suo valore, bisogna mostrare l’ammontare in rosso oppure in verde!
+  @Input() movType : 'in' | 'out' = 'in' //Il tipo di movimento (“type” nel modello): a seconda del suo valore, bisogna mostrare l’ammontare in rosso oppure in verde!
   @Input() title :  string = '' //Il titolo (nell’immagine “Lorem Ipsum“)
-  @Input() descrizone : string = '' //La descrizione (nell’immagine “Lorem ipsum dolor sit amet“)
+  @Input() description : string = 'lorme ipsuin bla bla bla bla bla bla bla bla' //La descrizione (nell’immagine “Lorem ipsum dolor sit amet“)
 
   panelOpenState = false;
+  movIn : boolean = true;
+
+
+  get SubstringDescription(){
+    const charNumber : number = 20;
+    return this.description.length >charNumber  ? this.description.substring(0,charNumber) + '...' : this.description
+     /*
+        if (this.description.length >20  ){
+          return this.description.substring(0,20) + '...'
+        }
+        return this.description
+    */
+  }
 }
 

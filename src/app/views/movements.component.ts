@@ -4,6 +4,7 @@ import { Component, OnInit, OnChanges, EventEmitter, Output, Input } from '@angu
 import { Card ,CardsListExample,cardTypes} from '../models/card';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'ac-movements-component',
   template: `
@@ -19,7 +20,7 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
                     <mat-form-field appearance="fill">
                       <mat-label>seleziona una carta</mat-label>
                       <mat-select>
-                        <mat-option *ngFor="let card of cards" [value]="card.number">
+                        <mat-option *ngFor="let card of cards" [value]="card._id">
                           {{card.number}}
                         </mat-option>
                       </mat-select>
@@ -32,8 +33,13 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
             </mat-card-title>
                 <mat-card-subtitle>
 
-                    <ac-movement-component></ac-movement-component>
-
+                    <ac-movement-component *ngFor="let mov of getFilterMovements(currentPage,pageSize, card_id)"
+                    [data]="mov.timestamp"
+                    [amount]="mov.amount"
+                    [movType]="mov.type"
+                    [title]="mov.title"
+                    [description]="mov.description"                                        >
+                    </ac-movement-component>
                     <mat-card-actions>
                         <div>
                           <button type="button" mat-raised-button style="width:99%; margin: 5px" (click)="caricaAltro()">Carica altro</button>
@@ -92,11 +98,34 @@ export class MovementsComponent  {
 
     cards : Card[] = CardsListExample;
     mMovements : Movement[] = MovementsExamples;
+    currentPage: number = 1;
+    pageSize : number = 4;
+    card_id : string ='';
 
 
     caricaAltro(){
-      console.log('click carica altro');
+      this.pageSize = this.pageSize + 1;
     }
+
+    getFilterMovements(pageNumber : number, PageSize : number, card_id : string): Movement[] {
+      /*
+      ritorna i movimenti tra min e max per la paginazione
+        0,1,2
+        3,4,5
+        6,7,8
+      */
+      if(card_id !=='') {
+        const tmpMov  = [...this.mMovements];
+
+        //tmpMov.map(x => x !== card_id)
+        //TODO FILTRARE PER CARTA ID
+
+        return this.mMovements.slice((pageNumber - 1) * PageSize, pageNumber * PageSize);
+      }
+      return this.mMovements.slice((pageNumber - 1) * PageSize, pageNumber * PageSize);
+
+    }
+
 
 
 
