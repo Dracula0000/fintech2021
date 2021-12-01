@@ -13,7 +13,11 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
             <mat-panel-title >
               <div class="amount" >
-                <i style="color : grey" >[{{data  | date:'dd/MM/YYYY'}}]</i>
+                <i style="color : grey" >
+                  <small>
+                    [{{data  | date:'dd/MM/YYYY'}}]
+                  </small>
+                </i>
               </div>
               <div
                 [ngClass]="{'colorGreen' : movType ==='in' , 'colorRed' : movType ==='out'}"
