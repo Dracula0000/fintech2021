@@ -2,6 +2,7 @@ import { Movement } from './../models/movement';
 import { Component, OnInit, OnChanges, EventEmitter, Output, ViewChild, Input } from '@angular/core';
 import { cardTypes} from '../models/card';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
+import { TruncatePipe } from '../shared/pipe/truncate.pipe';
 
 
 @Component({
@@ -33,7 +34,10 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
             </mat-panel-title>
 
             <mat-panel-description >
+                  <!--
                   {{SubstringDescription}}
+                  -->
+                  {{description | truncate:20}}
             </mat-panel-description>
           </mat-expansion-panel-header>
           {{description}}
@@ -94,6 +98,9 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
   `]
 })
+
+
+
 export class MovementComponent  {
 
   @Input() data : number | null = null; //La data (in formato stringa, esattamente come la stai vedendo)
@@ -101,6 +108,8 @@ export class MovementComponent  {
   @Input() movType : 'in' | 'out' = 'in' //Il tipo di movimento (“type” nel modello): a seconda del suo valore, bisogna mostrare l’ammontare in rosso oppure in verde!
   @Input() title :  string = '' //Il titolo (nell’immagine “Lorem Ipsum“)
   @Input() description : string = 'lorme ipsuin bla bla bla bla bla bla bla bla' //La descrizione (nell’immagine “Lorem ipsum dolor sit amet“)
+
+
 
   panelOpenState = false;
   movIn : boolean = true;
