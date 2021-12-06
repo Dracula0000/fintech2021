@@ -1,8 +1,4 @@
-import { Movement } from './../models/movement';
-import { Component, OnInit, OnChanges, EventEmitter, Output, ViewChild, Input } from '@angular/core';
-import { cardTypes} from '../models/card';
-import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
-import { TruncatePipe } from '../shared/pipe/truncate.pipe';
+import { Component,Input } from '@angular/core';
 
 
 @Component({
@@ -34,10 +30,11 @@ import { TruncatePipe } from '../shared/pipe/truncate.pipe';
             </mat-panel-title>
 
             <mat-panel-description >
-                  <!--
+                  <!--    -->
                   {{SubstringDescription}}
-                  -->
-                  {{description | truncate:20}}
+                <!-- TODO NON SI RIESCE AD USARE IL PIPE -->
+                 <!-- {{description | truncate:20}}-->
+
             </mat-panel-description>
           </mat-expansion-panel-header>
           {{description}}

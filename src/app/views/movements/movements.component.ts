@@ -1,7 +1,6 @@
-import { Movement, MovementsExamples } from './../models/movement';
+import { Movement, MovementsExamples } from './../../models/movement';
 import { Component, Input} from '@angular/core';
-import { Card ,CardsListExample} from '../models/card';
-
+import { Card ,CardsListExample} from '../../models/card';
 
 
 @Component({

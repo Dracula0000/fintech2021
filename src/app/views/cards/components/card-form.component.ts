@@ -1,8 +1,8 @@
 import { Component, OnInit, OnChanges, EventEmitter, Output, ViewChild } from '@angular/core';
-import { cardTypes} from '../models/card';
-import { CardForm} from '../models/card-form';
-import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
-import { validateHorizontalPosition } from '@angular/cdk/overlay';
+import { cardTypes} from '../../../models/card';
+import { CardForm } from './../../../models/card-form';
+import { FormBuilder,  Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'ac-cardform-component',

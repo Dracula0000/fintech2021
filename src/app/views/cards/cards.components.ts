@@ -1,12 +1,7 @@
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { Component, OnInit, OnChanges, ElementRef } from '@angular/core';
-import { CardListComponent } from './card-list.component';
-import { CardFormComponent } from './card-form.component';
-import { Card ,CardsListExample} from '../models/card';
-import { CardForm } from '../models/card-form';
+import { Component } from '@angular/core';
+import { Card ,CardsListExample} from '../../models/card';
+import { CardForm } from '../../models/card-form';
 import {MatSnackBar} from '@angular/material/snack-bar';
-
-
 
 @Component({
   selector: 'ac-cards-component',
@@ -39,6 +34,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
           </ac-cardList-component>
       </mat-sidenav-content>
   </mat-sidenav-container>
+  <router-outlet></router-outlet>
 
   `,
   styles: [`
