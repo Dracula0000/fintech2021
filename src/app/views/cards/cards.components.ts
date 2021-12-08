@@ -40,11 +40,6 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styles: [`
       .container {
         width: 100%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
       }
 
       .events {

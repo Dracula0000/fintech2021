@@ -1,8 +1,4 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
-
-
 
 @Component({
   selector: 'ac-root',
@@ -12,12 +8,12 @@ import { FormsModule } from '@angular/forms';
       <mat-sidenav
           mode="side"
           opened
-          >
-          <mat-toolbar >
-            <span>Menù</span>
-          </mat-toolbar>
+        >
+        <mat-toolbar >
+          <span>Menù</span>
+        </mat-toolbar>
         <mat-action-list>
-          <button mat-list-item routerLink="login">
+          <button mat-list-item  routerLink="login">
             <mat-icon aria-hidden="false" >home</mat-icon>
             Home
           </button>
@@ -37,21 +33,21 @@ import { FormsModule } from '@angular/forms';
             <mat-icon aria-hidden="false" >event</mat-icon>
               Appuntamenti
           </button>
-          <button mat-list-item >
+          <button mat-list-item routerLink="taxes">
             <mat-icon aria-hidden="false" >summarize</mat-icon>
-            Tasse
+              Tasse
           </button>
           <button mat-list-item routerLink="logout">
             <mat-icon aria-hidden="false" >person</mat-icon>
-            Mario Rossi<br>Logout
+              Mario Rossi<br>Logout
           </button>
         </mat-action-list>
       </mat-sidenav>
       <mat-sidenav-content>
           <mat-toolbar color="primary">
-            <span>NgFintech</span>
+            <span>{{title}}</span>
           </mat-toolbar>
-            <router-outlet></router-outlet>
+          <router-outlet></router-outlet>
           <!--<ac-login-component></ac-login-component>-->
           <!--
             <ac-cards-component></ac-cards-component>-->
@@ -107,8 +103,6 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class AppComponent {
-  title = 'Fintech';
-
-
+  title = 'NgFintech';
 
 }

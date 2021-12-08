@@ -11,26 +11,21 @@ import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
 //import custom
 
-import { SignInComponent } from './views/sign-in.component';
-import { RegisterComponent } from './views/register.component';
-
 import { ContacsComponent } from './views/contacts.component';
 import { ContactListComponent } from './views/contact-list.component';
 import { ContactFormComponent } from './views/contact-form.component';
 import { TransferComponent } from './views/transfer.component';
-import { AppointementsComponent } from './views/appointments.components';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignInComponent,
-    RegisterComponent,
     ContacsComponent,
     ContactListComponent,
     ContactFormComponent,
     TransferComponent,
-    AppointementsComponent
+
   ],
   imports: [
     BrowserModule,

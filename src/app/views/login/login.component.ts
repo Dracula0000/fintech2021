@@ -1,6 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import { NgModel } from '@angular/forms';
-import { SignInComponent } from './sign-in.component';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ac-login-component',
