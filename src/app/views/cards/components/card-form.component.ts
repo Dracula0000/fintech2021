@@ -76,6 +76,7 @@ import { FormBuilder,  Validators } from '@angular/forms';
   styles: [`
     .card-form{
       width: 400px;
+      height: 400px;
       margin: 2px auto;
 
     }

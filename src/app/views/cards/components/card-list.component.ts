@@ -59,6 +59,7 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
     .card-list{
       width: 95%;
       margin: 2px auto;
+      min-height: 600px;
 
     }
     .mat-form-field {
