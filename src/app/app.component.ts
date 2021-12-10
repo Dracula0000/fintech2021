@@ -1,3 +1,16 @@
+/*
+10/12/2021
+Mirco Rodighiero
+Corso Angular Ottobre/Novembre 2021.
+Applicazione Fintech:
+-Login
+-Cards
+-Movements
+-Menu
+
+si avvia con npm start
+*/
+
 import { Component } from '@angular/core';
 
 @Component({
