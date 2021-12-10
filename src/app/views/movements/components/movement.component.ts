@@ -31,9 +31,9 @@ import { Component,Input } from '@angular/core';
 
             <mat-panel-description >
                   <!--    -->
-                  {{SubstringDescription}}
+                  <!--{{SubstringDescription}}-->
                 <!-- TODO NON SI RIESCE AD USARE IL PIPE -->
-                 <!-- {{description | truncate:20}}-->
+                  {{description | truncate:20}}
 
             </mat-panel-description>
           </mat-expansion-panel-header>
